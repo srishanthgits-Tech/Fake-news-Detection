@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake Image Detection</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("{{ url_for('static', filename='img.jpg') }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Overlay */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    top: 0;
+    left: 0;
+}
+
+/* Wrapper */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    width: 500px;
+}
+
+/* Heading */
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.7);
+}
+
+/* Paragraph */
+p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #ddd;
+}
+
+/* Container */
+.container {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* File Input */
+input[type="file"] {
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.predict-btn {
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+}
+
+.back-btn {
+    background: linear-gradient(45deg,#ff416c,#ff4b2b);
+    margin-top: 15px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Result Section */
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+}
+
+img {
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>Fake Image Detection</h1>
+
+<p>
+Upload an image to detect whether it is real or tampered using AI-based image forensics.
+</p>
+
+<div class="container">
+
+<form method="post" enctype="multipart/form-data">
+<input type="file" name="image" required><br>
+<button type="submit" class="btn predict-btn">🔍 Predict</button>
+</form>
+
+{% if image %}
+<div class="result-box">
+<h3>Uploaded Image:</h3>
+<img src="{{image}}" width="300">
+</div>
+{% endif %}
+
+{% if result %}
+<div class="result-box">
+<h3>Result:</h3>
+<h2>{{result}}</h2>
+</div>
+{% endif %}
+
+<a href="/home">
+<button class="btn back-btn">⬅ Back</button>
+</a>
+
+<a href="/logout">
+<button class="btn back-btn">⬅ Logout</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

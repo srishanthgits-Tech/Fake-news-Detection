@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake News & Image Detection</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("{{ url_for('static', filename='img.jpg') }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Overlay */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+}
+
+/* Wrapper for heading + container */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    width: 500px;
+}
+
+/* Heading */
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Paragraph */
+p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #ddd;
+}
+
+/* Container (only buttons inside) */
+.container {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.news-btn {
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+}
+
+.image-btn {
+    background: linear-gradient(45deg,#ff416c,#ff4b2b);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- ✅ Heading ABOVE -->
+<h1>Fake News & Image Detection</h1>
+
+<p>
+This system uses advanced AI models to detect fake news articles and manipulated images.
+It helps users verify authenticity and reduce misinformation.
+</p>
+
+<!-- ✅ Container only for tabs -->
+<div class="container">
+
+<a href="/dashboard">
+<button class="btn news-btn">📰 Fake News Prediction</button>
+</a>
+
+<a href="/fake_image">
+<button class="btn image-btn">🖼 Fake Image Prediction</button>
+</a>
+
+<a href="/logout">
+<button class="btn image-btn">Logout</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

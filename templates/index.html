@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: url("{{ url_for('static', filename='img.jpg') }}") no-repeat center center;
+            background-size: cover; /* Cover the full screen */
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+        }
+
+        h1 {
+            font-size: 36px;
+            color: rgb(10, 10, 10);
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px; /* Space between buttons */
+        }
+
+        .start-btn {
+            font-size: 24px;
+            color: white;
+            background: #ff4500;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            background: #ff5733;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Smart Content Analyzer: Wikipedia Summary with Fake Detection & Sharing</h1>
+    <div class="button-container">
+        <a href="{{ url_for('register') }}" class="start-btn">Register</a>
+        <a href="{{ url_for('login') }}" class="start-btn">Login</a>
+    </div>
+</body>
+
+</html>

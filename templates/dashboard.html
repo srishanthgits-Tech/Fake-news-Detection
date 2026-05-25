@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url("{{ url_for('static', filename='img.jpg') }}");
+            background-color: #f0f8ff;
+            background-size: cover; /* Cover the entire screen */
+            background-repeat: no-repeat; /* Prevent image repetition */
+            background-position: center; /* Center the image */
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #0077cc;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid #0077cc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        .result {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .result h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .result p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .summarize-btn {
+            margin-top: 15px;
+            background-color: #28a745;
+        }
+
+        .summarize-btn:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>NEWS Generator</h1>
+    <form method="post">
+        <input type="text" name="topic" placeholder="Enter a topic to search" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if content %}
+    <div class="result">
+        <h2>Results for: {{ topic }}</h2>
+        <p>{{ content }}</p>
+
+        <form method="post" action="/summarize">
+            <input type="hidden" name="topic" value="{{ topic }}">
+            <button type="submit" class="summarize-btn">Summarize</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
